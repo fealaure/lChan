@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/marcio/Documents/phonegap/lChan/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="7ca71e6f7a4fe66bc577273d198a9ca3fa9e2382">
+        <dex dex="/Users/marcio/Documents/phonegap/lChan/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-unspecified-debug_dc382e95833ce93188407d3c2a80a506a54674ed.jar" />
+    </item>
+
+</items>

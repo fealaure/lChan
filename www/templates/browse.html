@@ -1,5 +1,22 @@
-<ion-view view-title="Browse">
+<ion-view view-title="/{{selectedBoard}}/">
   <ion-content>
-    <h1>Browse</h1>
+  	<ion-refresher
+	    pulling-text="Pull to refresh..."
+	    on-refresh="doRefresh()">
+  	</ion-refresher>
+    <div ng-repeat="story in stories | orderBy:'+now'">
+        <div class="list">
+          <div class="item item-thumbnail-left item-text-wrap">
+            <img ng-src="https://t.4cdn.org/{{selectedBoard}}/{{story.tim}}s.jpg" ng-click='showPopup("https://i.4cdn.org/{{selectedBoard}}/{{story.tim}}{{story.ext}}")'>
+              <!-- <a href="#/app/browse" ng-click='setThread(story.no)'> -->
+              <div  ng-click='setThread(story.no)' >
+	              <h2>{{story.sub}}</h2>
+	              <h3>{{story.name}}</h3>
+	              <p ng-bind-html="story.com"></p>
+              </div>
+              <!-- </a> -->
+          </div>
+        </div>
+      </div>
   </ion-content>
 </ion-view>

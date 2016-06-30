@@ -7,7 +7,7 @@
     <div ng-repeat="story in stories | orderBy:'+now'">
         <div class="list">
           <div class="item item-thumbnail-left item-text-wrap" href="#">
-            <img ng-src="https://t.4cdn.org/{{selectedBoard}}/{{story.tim}}s.jpg">
+            <img ng-src="https://t.4cdn.org/{{selectedBoard}}/{{story.tim}}s.jpg" ng-click='showPopup("https://i.4cdn.org/{{selectedBoard}}/{{story.tim}}{{story.ext}}")'>
               <h2>{{story.sub}}</h2>
               <h3>{{story.name}}</h3>
               <p ng-bind-html="story.com"></p>

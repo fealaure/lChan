@@ -117,8 +117,8 @@ angular.module('starter.controllers', [])
     }; 
 })
 
-.controller('4ChanController', function($http, $scope, boardService, $ionicLoading){
-    
+.controller('4ChanController', function($http, $scope, boardService, $ionicLoading, $ionicPopup){
+
     $scope.show = function() {
     $ionicLoading.show({
         template: 'Loading...'
@@ -133,14 +133,30 @@ angular.module('starter.controllers', [])
       });
     };
 
+    $scope.showPopup = function(img) {
+    $scope.data = {};
+      var myPopup = $ionicPopup.show({
+        template: '<img width="100%" src="'+img+'"/>',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+          }
+        ]
+      });
+    }
+
     $scope.doRefresh = function () {
       $scope.stories = [];
       $http.get('http://a.4cdn.org/'+boardService.selectedBoard+'/1.json')
       .success(function(response){
         angular.forEach(response.threads, function(post){
-          for (var i = 0; i < post.posts.length; i++) {
-            $scope.stories.push(post.posts[i]);
-          }
+          // for (var i = 0; i < post.posts.length; i++) {
+          //   $scope.stories.push(post.posts[i]);
+          // }
+          $scope.stories.push(post.posts[0]);
         })
         $scope.hide();
       })

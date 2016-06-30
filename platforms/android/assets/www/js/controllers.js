@@ -118,7 +118,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('4ChanController', function($http, $scope, boardService, $ionicLoading){
-    
+    //teste
     $scope.show = function() {
     $ionicLoading.show({
         template: 'Loading...'

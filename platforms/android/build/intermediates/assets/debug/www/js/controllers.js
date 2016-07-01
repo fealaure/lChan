@@ -117,7 +117,7 @@ angular.module('starter.controllers', [])
     }; 
 })
 
-.controller('4ChanController', function($http, $scope, boardService, $ionicLoading, $ionicPopup){
+.controller('4chanBoardController', function($http, $scope, boardService, $ionicLoading, $ionicPopup){
 
     $scope.show = function() {
     $ionicLoading.show({
@@ -170,8 +170,66 @@ angular.module('starter.controllers', [])
     $scope.doRefresh();
     $scope.selectedBoard = boardService.selectedBoard;
     console.log($scope.selectedBoard);
+    
+    $scope.setThread = function(threadNumber){
+        console.log(threadNumber);
+        boardService.selectedThread = threadNumber;
+        window.location="#/app/browse";
+    };
 })
 
 .service('boardService', function() {
   this.selectedBoard;
+  this.selectedThread;
+})
+
+.controller('threadController', function($http, $scope, boardService, $ionicLoading, $ionicPopup){
+
+    $scope.show = function() {
+    $ionicLoading.show({
+        template: 'Loading...'
+      }).then(function(){
+         console.log("The loading indicator is now displayed");
+      });
+    };
+
+    $scope.hide = function(){
+      $ionicLoading.hide().then(function(){
+         console.log("The loading indicator is now hidden");
+      });
+    };
+
+    $scope.showPopup = function(img) {
+    $scope.data = {};
+      var myPopup = $ionicPopup.show({
+        template: '<img width="100%" src="'+img+'"/>',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+          }
+        ]
+      });
+    }
+
+    $scope.doRefresh = function () {
+      $scope.stories = [];
+      $http.get('http://a.4cdn.org/'+boardService.selectedBoard+'/thread/'+boardService.selectedThread+'.json')
+      .success(function(response){
+        angular.forEach(response.posts, function(posts){
+          // for (var i = 0; i < post.posts.length; i++) {
+          //   $scope.stories.push(post.posts[i]);
+          // }
+          $scope.stories.push(posts);
+          console.log(posts);
+        })
+      })
+      $scope.selectedBoard = boardService.selectedBoard;
+      $scope.selectedThread = boardService.selectedThread;
+    }
+    //chama o serviço
+    $scope.doRefresh();
+    // console.log($scope.selectedBoard);
 });

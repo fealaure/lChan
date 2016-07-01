@@ -45,10 +45,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/browse',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          templateUrl: 'templates/browse.html',
+          controller: 'threadController'
         }
       }
     })
+
     .state('app.boards', {
       url: '/boards',
       views: {
@@ -64,7 +66,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/board.html',
-        controller: '4ChanController'
+        controller: '4chanBoardController'
       }
     }
   });

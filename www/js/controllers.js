@@ -150,13 +150,14 @@ angular.module('starter.controllers', [])
 
     $scope.doRefresh = function () {
       $scope.stories = [];
-      $http.get('http://a.4cdn.org/'+boardService.selectedBoard+'/1.json')
+      $http.get('http://a.4cdn.org/'+boardService.selectedBoard+'/catalog.json')
       .success(function(response){
-        angular.forEach(response.threads, function(post){
-          // for (var i = 0; i < post.posts.length; i++) {
-          //   $scope.stories.push(post.posts[i]);
-          // }
-          $scope.stories.push(post.posts[0]);
+        angular.forEach(response, function(thread){
+          for (var i = 0; i < thread.threads.length; i++) {
+            // console.log(thread.threads);
+            $scope.stories.push(thread.threads[i]);
+          }
+          // $scope.stories.push(thread.threads);
         })
         $scope.hide();
       })
